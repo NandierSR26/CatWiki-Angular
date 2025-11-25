@@ -6,6 +6,67 @@
         </div>
     </section>
 
+    <section class="carousel-breeds">
+        <div class="carousel-header">
+            <div>
+                <h2>Most popular cat breeds</h2>
+                <p>66+ Breeds For you to discover</p>
+            </div>
+
+            <a [routerLink]="['/search']">See more</a>
+        </div>
+
+        @if (carouselCatsLoading()) {
+            <div class="carousel-loader">Loading cats...</div>
+        } @else {
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    @for (cat of carouselCats(); track cat.id) {
+                        <button class="carousel-item" 
+                             (click)="toBreedPage(cat.id)"
+                             tabindex="0"
+                             [attr.aria-label]="'View details for ' + cat.name + ' breed'">
+                            <div class="cat-card">
+                                <div class="cat-image">
+                                    @if (cat.reference_image_id) {
+                                        <img [src]="'https://cdn2.thecatapi.com/images/' + cat.reference_image_id + '.jpg'" 
+                                             [alt]="cat.name" 
+                                             loading="lazy" />
+                                    } @else {
+                                        <div class="no-image">🐱</div>
+                                    }
+                                </div>
+                                <h3 class="cat-name">{{ cat.name }}</h3>
+                                <p class="cat-origin">{{ cat.origin }}</p>
+                            </div>
+                        </button>
+                    }
+                    <!-- Duplicate items for seamless loop -->
+                    @for (cat of carouselCats(); track cat.id + '_duplicate') {
+                        <button class="carousel-item" 
+                             (click)="toBreedPage(cat.id)"
+                             tabindex="0"
+                             [attr.aria-label]="'View details for ' + cat.name + ' breed'">
+                            <div class="cat-card">
+                                <div class="cat-image">
+                                    @if (cat.reference_image_id) {
+                                        <img [src]="'https://cdn2.thecatapi.com/images/' + cat.reference_image_id + '.jpg'" 
+                                             [alt]="cat.name" 
+                                             loading="lazy" />
+                                    } @else {
+                                        <div class="no-image">🐱</div>
+                                    }
+                                </div>
+                                <h3 class="cat-name">{{ cat.name }}</h3>
+                                <p class="cat-origin">{{ cat.origin }}</p>
+                            </div>
+                        </button>
+                    }
+                </div>
+            </div>
+        }
+    </section>
+
     <section class="motivation">
         <div class="section-text-content">
             <h2>Why should you have a cat</h2>
