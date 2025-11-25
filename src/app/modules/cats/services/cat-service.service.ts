@@ -11,14 +11,12 @@ export class CatService {
 
   private readonly http = inject(HttpClient);
   private readonly baseUrl = environment.apiUrl;
-  private breedsList: ICatBreed[] = []
 
   getCats(page: number = 0, limit: number = 20): Observable<ICatBreed[]> {
     const url = `${this.baseUrl}/cats/breeds?page=${page}&limit=${limit}`;
     return this.http.get<ICatBreed[]>(url).pipe(
       map((resp) => {
-        this.breedsList = [...this.breedsList, ...resp];
-        return this.breedsList;
+        return resp;
       }),
       catchError((error) => {
         console.error('Error fetching cat breeds:', error);
@@ -27,4 +25,16 @@ export class CatService {
     )
   }
 
+  getCatById(breedId: string): Observable<ICatBreed> {
+    const url = `${this.baseUrl}/cats/breeds/${breedId}`;
+    return this.http.get<ICatBreed>(url).pipe(
+      map((resp) => {
+        return resp;
+      }),
+      catchError((error) => {
+        console.error('Error fetching cat breed by ID:', error);
+        throw error;
+      })
+    );
+  }
 }
