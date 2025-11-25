@@ -1,5 +1,4 @@
 <main class="breed-page">
-  <!-- Loading State -->
   @if (loading()) {
     <div class="loading-container">
       <div class="loading-spinner"></div>
@@ -7,7 +6,6 @@
     </div>
   }
 
-  <!-- Error State -->
   @else if (error()) {
     <div class="error-container">
       <h2>Oops! Something went wrong</h2>
@@ -19,7 +17,6 @@
     </div>
   }
 
-  <!-- Success State -->
   @else if (cat()) {
     <div class="breed-content">
       <!-- Header Section -->
@@ -29,9 +26,7 @@
         <p class="breed-origin">Origin: {{ cat()!.origin }}</p>
       </header>
 
-      <!-- Main Content -->
       <div class="breed-main">
-        <!-- Image Section -->
         <section class="breed-image-section">
           @if (cat()!.reference_image_id) {
             <img 
@@ -47,7 +42,6 @@
           }
         </section>
 
-        <!-- Info Section -->
         <section class="breed-info">
           <div class="breed-description">
             <h2>About {{ cat()!.name }}</h2>
@@ -78,7 +72,6 @@
             </div>
           </div>
 
-          <!-- Characteristics -->
           <div class="breed-characteristics">
             <h3>Characteristics</h3>
             <div class="characteristics-grid">
@@ -113,7 +106,6 @@
     </div>
   }
 
-  <!-- Fallback -->
   @else {
     <div class="empty-state">
       <h2>No breed information available</h2>
