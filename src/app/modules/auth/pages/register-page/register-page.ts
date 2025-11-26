@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal, inject } from '@angular/core';
 import { ReactiveFormsModule, Validators, NonNullableFormBuilder, AbstractControl, ValidationErrors } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { RegisterService } from '../../services/register.service';
 
 @Component({
   selector: 'app-register-page',
@@ -11,6 +12,7 @@ import { RouterModule } from '@angular/router';
 })
 export class RegisterPage {
   private readonly fb = inject(NonNullableFormBuilder);
+  private readonly registerService = inject(RegisterService);
 
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
@@ -30,11 +32,26 @@ export class RegisterPage {
       return;
     }
 
-    // Imprimir los valores del formulario
-    console.log('Form Values:', this.registerForm.value);
-    console.log('Name:', this.registerForm.get('name')?.value);
-    console.log('Email:', this.registerForm.get('email')?.value);
-    console.log('Password:', this.registerForm.get('password')?.value);
+    const { name, email, password } = this.registerForm.value;
+
+    if (!name || !email || !password) {
+      return;
+    }
+    this.loading.set(true);
+    this.error.set(null);
+
+    this.registerService.register({ name, email, password }).subscribe({
+      next: () => {
+        // Handle successful registration (e.g., redirect to login)
+        this.registerForm.reset();
+        this.loading.set(false);
+      },
+      error: (error) => {
+        console.log('Registration error:', error.error.message);
+        this.error.set(error.error?.message || 'Registration failed');
+        this.loading.set(false);
+      }
+    });
   }
 
   togglePasswordVisibility(): void {

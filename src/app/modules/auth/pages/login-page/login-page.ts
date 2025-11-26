@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, signal, inject } from '@angular/cor
 import { ReactiveFormsModule, Validators, NonNullableFormBuilder } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { ILoginResponse, User } from '../../interfaces/login.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -15,6 +16,7 @@ export class LoginPage {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly loginService = inject(LoginService);
   private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
 
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
@@ -44,8 +46,8 @@ export class LoginPage {
     this.loginService.login({ email, password }).subscribe({
       next: (response: ILoginResponse) => {
         
-        // Save authentication data to maintain session
-        this.saveUserSession(response);
+        // Save authentication data using AuthService (this will update signals automatically)
+        this.authService.saveUserSession(response);
         
         // Reset form and loading state
         this.loginForm.reset();
@@ -88,50 +90,16 @@ export class LoginPage {
     return null;
   }
 
-  private saveUserSession(response: ILoginResponse): void {
-    if (response.data?.token) {
-      localStorage.setItem('authToken', response.data.token);
-    }
-    
-    if (response.data?.user) {
-      localStorage.setItem('currentUser', JSON.stringify(response.data.user));
-    }
-    
-    
-    localStorage.setItem('isAuthenticated', 'true');
-  }
-
+  // Métodos estáticos para compatibilidad con guards (delegando a AuthService)
   static isAuthenticated(): boolean {
-    const isAuth = localStorage.getItem('isAuthenticated');
-    const token = localStorage.getItem('authToken');
-    
-    if (!isAuth || !token) {
-      return false;
-    }
-    
-    return isAuth === 'true';
+    return AuthService.isAuthenticatedStatic();
   }
 
   static getCurrentUser(): User | null {
-    try {
-      const userStr = localStorage.getItem('currentUser');
-      return userStr ? JSON.parse(userStr) : null;
-    } catch {
-      return null;
-    }
+    return AuthService.getCurrentUserStatic();
   }
 
   static getAuthToken(): string | null {
     return localStorage.getItem('authToken');
-  }
-
-  static clearUserSession(): void {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('isAuthenticated');
-  }
-
-  static logout(): void {
-    this.clearUserSession();
   }
 }

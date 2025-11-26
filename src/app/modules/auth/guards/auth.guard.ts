@@ -1,10 +1,11 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
-  if (isAuthenticated()) {
+  if (AuthService.isAuthenticatedStatic()) {
     return true;
   }
 
@@ -17,7 +18,7 @@ export const authGuard: CanActivateFn = (route, state) => {
 export const guestGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
-  if (!isAuthenticated()) {
+  if (!AuthService.isAuthenticatedStatic()) {
     return true;
   }
 
@@ -27,29 +28,17 @@ export const guestGuard: CanActivateFn = (route, state) => {
   return false;
 };
 
-function isAuthenticated(): boolean {
-  const isAuth = localStorage.getItem('isAuthenticated');
-  const token = localStorage.getItem('authToken');
-  
-  if (!isAuth || !token) {
-    return false;
-  }
-  
-  return isAuth === 'true';
+// Funciones de utilidad para compatibilidad (delegando a AuthService)
+export function isAuthenticated(): boolean {
+  return AuthService.isAuthenticatedStatic();
 }
 
-export function getCurrentUser(): any | null {
-  try {
-    const userStr = localStorage.getItem('currentUser');
-    return userStr ? JSON.parse(userStr) : null;
-  } catch {
-    return null;
-  }
+export function getCurrentUser() {
+  return AuthService.getCurrentUserStatic();
 }
 
 export function clearSession(): void {
-  localStorage.removeItem('authToken');
-  localStorage.removeItem('currentUser');
-  localStorage.removeItem('isAuthenticated');
-  localStorage.removeItem('loginTimestamp');
+  // Usar el servicio para limpiar la sesión y actualizar los signals
+  const authService = inject(AuthService);
+  authService.logout();
 }
