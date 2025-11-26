@@ -7,11 +7,9 @@
             <a routerLink="/cats/search" class="header__nav-link">Search</a>
             
             @if (!isAuthenticated()) {
-                <!-- Navegación para usuarios no autenticados -->
                 <a routerLink="/auth/login" class="header__nav-link">Sign In</a>
                 <a routerLink="/auth/register" class="header__register-btn">Sign Up</a>
             } @else {
-                <!-- Navegación para usuarios autenticados -->
                 <div class="header__user-menu">
                     <a routerLink="/auth/profile" class="header__profile-btn">
                         <i class="fa-solid fa-user"></i>

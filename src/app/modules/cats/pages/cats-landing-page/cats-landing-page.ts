@@ -28,7 +28,7 @@ export class CatsLandingPage implements OnInit {
   toBreedPage(breedId: string): void {
     if (breedId) {
       console.log('Navigating to breed page for breedId:', breedId);
-      this.router.navigate(['/breed', breedId]);
+      this.router.navigate(['/cats/breed', breedId]);
     }
   }
 

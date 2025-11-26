@@ -1,1 +1,143 @@
-<p>profile-page works!</p>,
+<main class="profile-page">
+  <!-- Header con imagen de portada -->
+  <section class="profile-hero">
+    <div class="hero-background">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="profile-header">
+      <div class="profile-avatar">
+        <span class="avatar-initials">{{ userInitials() }}</span>
+      </div>
+      <div class="profile-info">
+        <h1 class="profile-name">{{ currentUser()?.name || 'User Name' }}</h1>
+        <p class="profile-email">{{ currentUser()?.email || 'user@example.com' }}</p>
+        <p class="member-since">Member since {{ memberSince() }}</p>
+      </div>
+      <div class="profile-actions">
+        <button type="button" class="btn-edit" (click)="onEditProfile()">
+          <i class="fa-solid fa-edit"></i>
+          Edit Profile
+        </button>
+        <button type="button" class="btn-logout" (click)="onLogout()">
+          <i class="fa-solid fa-sign-out-alt"></i>
+          Logout
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenido principal del perfil -->
+  <section class="profile-content">
+    <div class="content-container">
+      
+      <!-- Estadísticas del usuario -->
+      <div class="stats-section">
+        <h2>Your CatWiki Stats</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="stat-content">
+              <h3>{{ profileStats.favoriteBreeds }}</h3>
+              <p>Favorite Breeds</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa-solid fa-search"></i>
+            </div>
+            <div class="stat-content">
+              <h3>{{ profileStats.searchesThisMonth }}</h3>
+              <p>Searches This Month</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa-solid fa-eye"></i>
+            </div>
+            <div class="stat-content">
+              <h3>{{ profileStats.profileViews }}</h3>
+              <p>Profile Views</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Información personal -->
+      <div class="info-section">
+        <h2>About Me</h2>
+        <div class="info-card">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          
+          <div class="interests">
+            <h3>My Interests</h3>
+            <div class="interest-tags">
+              <span class="tag">Cat Behavior</span>
+              <span class="tag">Pet Care</span>
+              <span class="tag">Breed Information</span>
+              <span class="tag">Feline Health</span>
+              <span class="tag">Cat Photography</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Razas favoritas -->
+      <div class="favorites-section">
+        <h2>Favorite Cat Breeds</h2>
+        <div class="favorites-grid">
+          @for (breed of favoriteBreeds; track breed) {
+            <div class="favorite-card">
+              <div class="breed-placeholder">
+                <i class="fa-solid fa-cat"></i>
+              </div>
+              <h3>{{ breed }}</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <a routerLink="/cats/search" class="learn-more">Learn More</a>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Actividad reciente -->
+      <div class="activity-section">
+        <h2>Recent Activity</h2>
+        <div class="activity-card">
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-icon">
+                <i class="fa-solid fa-search"></i>
+              </div>
+              <div class="activity-content">
+                <p><strong>Searched for Persian cats</strong></p>
+                <span class="activity-time">2 hours ago</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon">
+                <i class="fa-solid fa-heart"></i>
+              </div>
+              <div class="activity-content">
+                <p><strong>Added Maine Coon to favorites</strong></p>
+                <span class="activity-time">1 day ago</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon">
+                <i class="fa-solid fa-user-edit"></i>
+              </div>
+              <div class="activity-content">
+                <p><strong>Updated profile information</strong></p>
+                <span class="activity-time">3 days ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+</main>

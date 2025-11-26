@@ -106,7 +106,7 @@ export class SearchPage implements OnInit, AfterViewInit, OnDestroy {
   navigateToBreed(breedId: string): void {
     // Guardar estado antes de navegar
     this.saveSearchState();
-    this.router.navigate(['/breed', breedId]);
+    this.router.navigate(['/cats/breed', breedId]);
   }
 
   clearSearch(): void {

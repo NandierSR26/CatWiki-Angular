@@ -1,115 +1,140 @@
 <main class="breed-page">
   @if (loading()) {
-    <div class="loading-container">
-      <div class="loading-spinner"></div>
-      <p>Loading breed information...</p>
-    </div>
+  <div class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Loading breed information...</p>
+  </div>
   }
 
   @else if (error()) {
-    <div class="error-container">
-      <h2>Oops! Something went wrong</h2>
-      <p>{{ error() }}</p>
-      <button class="retry-button" (click)="onRetry()">
-        Try Again
-      </button>
-      <a routerLink="/" class="back-home">← Back to Home</a>
-    </div>
+  <div class="error-container">
+    <h2>Oops! Something went wrong</h2>
+    <p>{{ error() }}</p>
+    <button class="retry-button" (click)="onRetry()">
+      Try Again
+    </button>
+    <a routerLink="/" class="back-home">← Back to Home</a>
+  </div>
   }
 
   @else if (cat()) {
-    <div class="breed-content">
-      <!-- Header Section -->
-      <header class="breed-header">
-        <a routerLink="/" class="back-link">← Back to Home</a>
-        <h1>{{ cat()!.name }}</h1>
-        <p class="breed-origin">Origin: {{ cat()!.origin }}</p>
-      </header>
+  <div class="breed-content">
+    <!-- Header Section -->
+    <header class="breed-header">
+      <a routerLink="/" class="back-link">← Back to Home</a>
+      <h1>{{ cat()!.name }}</h1>
+      <p class="breed-origin">Origin: {{ cat()!.origin }}</p>
+    </header>
 
-      <div class="breed-main">
-        <section class="breed-image-section">
-          @if (cat()!.reference_image_id) {
-            <img 
-              [src]="'https://cdn2.thecatapi.com/images/' + cat()!.reference_image_id + '.jpg'" 
-              [alt]="cat()!.name + ' cat breed'"
-              class="breed-image"
-              loading="lazy" />
-          } @else {
-            <div class="no-image-placeholder">
-              <span>🐱</span>
-              <p>No image available</p>
+    <div class="breed-main">
+      <section class="breed-image-section">
+        @if (cat()!.reference_image_id) {
+        <img [src]="'https://cdn2.thecatapi.com/images/' + cat()!.reference_image_id + '.jpg'"
+          [alt]="cat()!.name + ' cat breed'" class="breed-image" loading="lazy" />
+        } @else {
+        <div class="no-image-placeholder">
+          <span>🐱</span>
+          <p>No image available</p>
+        </div>
+        }
+      </section>
+
+      <section class="breed-info">
+        <div class="breed-description">
+          <h2>About {{ cat()!.name }}</h2>
+          <p>{{ cat()!.description }}</p>
+        </div>
+
+        <div class="breed-details">
+          <h3>Breed Details</h3>
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="label">Life Span:</span>
+              <span class="value">{{ cat()!.life_span }} years</span>
             </div>
-          }
-        </section>
-
-        <section class="breed-info">
-          <div class="breed-description">
-            <h2>About {{ cat()!.name }}</h2>
-            <p>{{ cat()!.description }}</p>
-          </div>
-
-          <div class="breed-details">
-            <h3>Breed Details</h3>
-            <div class="details-grid">
-              <div class="detail-item">
-                <span class="label">Life Span:</span>
-                <span class="value">{{ cat()!.life_span }} years</span>
-              </div>
-              <div class="detail-item">
-                <span class="label">Temperament:</span>
-                <span class="value">{{ cat()!.temperament }}</span>
-              </div>
-              <div class="detail-item">
-                <span class="label">Weight:</span>
-                <span class="value">{{ cat()!.weight.metric }} kg</span>
-              </div>
-              @if (cat()!.alt_names) {
-                <div class="detail-item">
-                  <span class="label">Alternative Names:</span>
-                  <span class="value">{{ cat()!.alt_names }}</span>
-                </div>
-              }
+            <div class="detail-item">
+              <span class="label">Temperament:</span>
+              <span class="value">{{ cat()!.temperament }}</span>
             </div>
+            <div class="detail-item">
+              <span class="label">Weight:</span>
+              <span class="value">{{ cat()!.weight.metric }} kg</span>
+            </div>
+            @if (cat()!.alt_names) {
+            <div class="detail-item">
+              <span class="label">Alternative Names:</span>
+              <span class="value">{{ cat()!.alt_names }}</span>
+            </div>
+            }
           </div>
+        </div>
 
-          <div class="breed-characteristics">
-            <h3>Characteristics</h3>
-            <div class="characteristics-grid">
-              <div class="characteristic">
-                <span class="char-name">Adaptability</span>
-                <div class="rating-bar">
-                  <div class="rating-fill" [style.width.%]="(cat()!.adaptability / 5) * 100"></div>
-                </div>
+        <div class="breed-characteristics">
+          <h3>Characteristics</h3>
+          <div class="characteristics-grid">
+            <div class="characteristic">
+              <span class="char-name">Adaptability</span>
+              <div class="rating-bar">
+                <div class="rating-fill" [style.width.%]="(cat()!.adaptability / 5) * 100"></div>
               </div>
-              <div class="characteristic">
-                <span class="char-name">Affection Level</span>
-                <div class="rating-bar">
-                  <div class="rating-fill" [style.width.%]="(cat()!.affection_level / 5) * 100"></div>
-                </div>
+            </div>
+            <div class="characteristic">
+              <span class="char-name">Affection Level</span>
+              <div class="rating-bar">
+                <div class="rating-fill" [style.width.%]="(cat()!.affection_level / 5) * 100"></div>
               </div>
-              <div class="characteristic">
-                <span class="char-name">Energy Level</span>
-                <div class="rating-bar">
-                  <div class="rating-fill" [style.width.%]="(cat()!.energy_level / 5) * 100"></div>
-                </div>
+            </div>
+            <div class="characteristic">
+              <span class="char-name">Energy Level</span>
+              <div class="rating-bar">
+                <div class="rating-fill" [style.width.%]="(cat()!.energy_level / 5) * 100"></div>
               </div>
-              <div class="characteristic">
-                <span class="char-name">Intelligence</span>
-                <div class="rating-bar">
-                  <div class="rating-fill" [style.width.%]="(cat()!.intelligence / 5) * 100"></div>
-                </div>
+            </div>
+            <div class="characteristic">
+              <span class="char-name">Intelligence</span>
+              <div class="rating-bar">
+                <div class="rating-fill" [style.width.%]="(cat()!.intelligence / 5) * 100"></div>
               </div>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
+  </div>
   }
 
-  @else {
-    <div class="empty-state">
-      <h2>No breed information available</h2>
-      <a routerLink="/" class="back-home">← Back to Home</a>
+  @if (catImages().length > 0) {
+  <section class="breed-images-section">
+    <h2>More {{ cat()!.name }} Photos</h2>
+    <div class="carousel-container">
+      <div class="carousel-track">
+        @for (imageUrl of catImages(); track imageUrl) {
+          <div class="carousel-item">
+            <img [src]="imageUrl" [alt]="cat()!.name + ' breed'" class="cat-image" loading="lazy" />
+            <!-- <div class="cat-info">
+              <h3 class="cat-name">{{ cat()!.name }}</h3>
+              <p class="cat-origin">{{ cat()!.origin }}</p>
+            </div> -->
+          </div>
+        }
+        <!-- Duplicate items for seamless loop -->
+        @for (imageUrl of catImages(); track imageUrl) {
+          <div class="carousel-item">
+            <img [src]="imageUrl" [alt]="cat()!.name + ' breed'" class="cat-image" loading="lazy" />
+            <!-- <div class="cat-info">
+              <h3 class="cat-name">{{ cat()!.name }}</h3>
+              <p class="cat-origin">{{ cat()!.origin }}</p>
+            </div> -->
+          </div>
+        }
+      </div>
     </div>
+  </section>
+  }
+  @else {
+  <div class="empty-state">
+    <h2>No breed information available</h2>
+    <a routerLink="/" class="back-home">← Back to Home</a>
+  </div>
   }
 </main>
