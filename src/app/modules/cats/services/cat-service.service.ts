@@ -37,4 +37,18 @@ export class CatService {
       })
     );
   }
+
+
+  searchCats(term: string): Observable<ICatBreed[]> {
+    const url = `${this.baseUrl}/cats/search?query=${term}`;
+    return this.http.get<ICatBreed[]>(url).pipe(
+      map((resp) => {
+        return resp;
+      }),
+      catchError((error) => {
+        console.error('Error searching cat breeds:', error);
+        throw error;
+      })
+    );
+  }
 }

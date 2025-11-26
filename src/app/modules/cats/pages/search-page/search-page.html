@@ -1,1 +1,121 @@
-<p>search-page works!</p>,
+<main class="search-page">
+  <section class="search-header">
+    <a routerLink="/" class="back-link">← Back to Home</a>
+    <h1>Find Your Perfect Cat Breed</h1>
+    <p class="search-subtitle">Discover detailed information about different cat breeds</p>
+  </section>
+
+  <section class="search-section">
+    <div class="search-container">
+      <div class="search-input-wrapper">
+        <input 
+          type="text" 
+          class="search-input"
+          placeholder="Search for cat breeds (e.g., Persian, Siamese, Maine Coon...)"
+          #searchInput
+          (keyup.enter)="searchCats(searchInput.value)"
+          autocomplete="off" />
+        <button class="search-button" type="button" (click)="searchCats(searchInput.value)">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+      
+      <div class="search-suggestions" style="display: none;">
+        <div class="suggestion-header">
+          <span>Popular breeds</span>
+        </div>
+        <button class="suggestion-item" type="button">
+          Persian
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="results-section">
+    @if (loading()) {
+        <div class="loading-container">
+          <div class="loading-spinner"></div>
+          <p>Searching for cat breeds...</p>
+        </div>
+    }
+
+    @else if (!hasSearched() && cats().length === 0) {
+        <div class="empty-search-state">
+          <i class="fa-solid fa-cat"></i>
+          <h2>Start Your Search</h2>
+          <p>Type a cat breed name above to begin exploring</p>
+        </div>
+    }
+    
+    @else if (hasSearched() && cats().length === 0) {
+        <div class="no-results-state">
+          <i class="fa-solid fa-cat no-results-icon"></i>
+          <h2>No breeds found</h2>
+          <p>We couldn't find any cat breeds matching "<strong>{{ currentSearchTerm() }}</strong>"</p>
+          <div class="suggestions-help">
+            <h3>Try these suggestions:</h3>
+            <ul>
+              <li>Check your spelling</li>
+              <li>Use different keywords</li>
+              <li>Try more general terms</li>
+            </ul>
+          </div>
+          <button class="clear-search-btn" (click)="clearSearch()">Clear Search</button>
+        </div>
+    }
+
+    @else {
+        <div class="results-container">
+          <div class="results-header">
+            <h2>Search Results</h2>
+            <p class="results-count">{{ cats().length }} breed(s) found for "<strong>{{ currentSearchTerm() }}</strong>"</p>
+            <button class="clear-search-btn" (click)="clearSearch()">New Search</button>
+          </div>
+          
+          <div class="results-grid">
+            @for (cat of cats(); track cat.id) {
+                <div class="breed-card">
+                  <div class="breed-image-container">
+                    @if (cat.reference_image_id) {
+                      <img [src]="'https://cdn2.thecatapi.com/images/' + cat.reference_image_id + '.jpg'" 
+                           [alt]="cat.name + ' cat breed'"
+                           class="breed-image"
+                           loading="lazy" />
+                    } @else {
+                      <div class="no-breed-image">
+                        <span>🐱</span>
+                      </div>
+                    }
+                  </div>
+                  
+                  <div class="breed-info">
+                    <h3 class="breed-name">{{ cat.name }}</h3>
+                    <p class="breed-origin">{{ cat.origin }}</p>
+                    <p class="breed-description">{{ getShortDescription(cat.description) }}</p>
+                    
+                    <div class="breed-stats">
+                      <div class="stat">
+                        <span class="stat-label">Affection</span>
+                        <div class="stat-bar">
+                          <div class="stat-fill" [style.width.%]="(cat.affection_level / 5) * 100"></div>
+                        </div>
+                      </div>
+                      <div class="stat">
+                        <span class="stat-label">Energy</span>
+                        <div class="stat-bar">
+                          <div class="stat-fill" [style.width.%]="(cat.energy_level / 5) * 100"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="breed-card-footer" (click)="navigateToBreed(cat.id)" (keydown)="navigateToBreed(cat.id)">
+                    <span class="view-details">View Details</span>
+                  </div>
+                </div>
+            }
+          </div>
+        </div>
+    }
+  </section>
+</main>
