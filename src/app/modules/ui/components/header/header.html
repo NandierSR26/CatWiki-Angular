@@ -1,21 +1,21 @@
 <header class="header">
-    <div class="header__container">
-        <a routerLink="/" class="header__logo-link">
-            <img src="assets/img/CatwikiLogo.svg" alt="CatWiki Logo" class="header__logo-image" />
+    <div class="header-container">
+        <a routerLink="/" class="header-logo-link">
+            <img src="assets/img/CatwikiLogo.svg" alt="CatWiki Logo" class="header-logo-image" />
         </a>
-        <nav class="header__nav">
-            <a routerLink="/cats/search" class="header__nav-link">Search</a>
-            
+        <nav class="header-nav">
+            <a routerLink="/cats/search" class="header-nav-link">Search</a>
+
             @if (!isAuthenticated()) {
-                <a routerLink="/auth/login" class="header__nav-link">Sign In</a>
-                <a routerLink="/auth/register" class="header__register-btn">Sign Up</a>
+                <a routerLink="/auth/login" class="header-nav-link">Sign In</a>
+                <a routerLink="/auth/register" class="header-register-btn">Sign Up</a>
             } @else {
-                <div class="header__user-menu">
-                    <a routerLink="/auth/profile" class="header__profile-btn">
+                <div class="header-user-menu">
+                    <a routerLink="/auth/profile" class="header-profile-btn">
                         <i class="fa-solid fa-user"></i>
                         <span>{{ currentUser()?.name || 'Profile' }}</span>
                     </a>
-                    <button type="button" class="header__logout-btn" (click)="onLogout()">
+                    <button type="button" class="header-logout-btn" (click)="onLogout()">
                         <i class="fa-solid fa-sign-out-alt"></i>
                         <span>Logout</span>
                     </button>

@@ -1,4 +1,4 @@
-footer {
+.footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -9,7 +9,7 @@ footer {
     color: #FFFFFF;
 }
 
-footer p:nth-child(1) {
+.footer-logo {
     font-family: var(--Mystery-Quest);
     font-style: normal;
     font-weight: 400;
@@ -17,7 +17,7 @@ footer p:nth-child(1) {
     color: #FFFFFF;
 }
 
-footer p:nth-child(2) {
+.footer-copyright {
     font-family: var(--Montserrat);
     font-style: normal;
     font-weight: 400;

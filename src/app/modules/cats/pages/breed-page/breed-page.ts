@@ -43,7 +43,6 @@ export class BreedPage implements OnInit, OnDestroy {
         this.catImagesService.getCatImagesByBreed(breedId).subscribe({
           next: (images) => {
             this.catImages.set(images);
-            console.log('Cat images loaded:', images);
           },
           error: (error) => {
             console.error('Error loading cat images:', error);

@@ -6,7 +6,7 @@
   background: white;
 }
 
-.header__container {
+.header-container {
   width: 90%;
   max-width: 1200px;
   display: flex;
@@ -15,22 +15,22 @@
   padding: 10px 0;
 }
 
-.header__logo-link {
+.header-logo-link {
   width: 250px;
 }
 
-.header__logo-link img {
+.header-logo-link img {
   width: 100%;
   height: auto;
 }
 
-.header__nav {
+.header-nav {
   display: flex;
   align-items: center;
   gap: 1.5rem;
 }
 
-.header__nav-link {
+.header-nav-link {
   font-family: var(--Montserrat);
   font-weight: 500;
   color: #2c3e50;
@@ -40,18 +40,18 @@
   border-radius: 8px;
 }
 
-.header__nav-link:hover {
+.header-nav-link:hover {
   color: #3498db;
   background: rgba(52, 152, 219, 0.1);
 }
 
-.header__auth-links {
+.header-auth-links {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.header__register-btn {
+.header-register-btn {
   font-family: var(--Montserrat);
   font-weight: 600;
   color: white;
@@ -62,18 +62,18 @@
   transition: all 0.3s ease;
 }
 
-.header__register-btn:hover {
+.header-register-btn:hover {
   background: #2980b9;
   transform: translateY(-2px);
 }
 
-.header__user-menu {
+.header-user-menu {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.header__profile-btn {
+.header-profile-btn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -88,18 +88,18 @@
   border: 1px solid rgba(52, 152, 219, 0.2);
 }
 
-.header__profile-btn:hover {
+.header-profile-btn:hover {
   background: rgba(52, 152, 219, 0.1);
   color: #3498db;
   transform: translateY(-1px);
 }
 
-.header__profile-btn i {
+.header-profile-btn i {
   font-size: 1rem;
   color: #3498db;
 }
 
-.header__logout-btn {
+.header-logout-btn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -115,64 +115,64 @@
   font-size: 0.9rem;
 }
 
-.header__logout-btn:hover {
+.header-logout-btn:hover {
   background: #e74c3c;
   color: white;
   transform: translateY(-1px);
 }
 
-.header__logout-btn i {
+.header-logout-btn i {
   font-size: 0.9rem;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .header__container {
+  .header-container {
     width: 95%;
     padding: 8px 0;
   }
   
-  .header__logo-link {
+  .header-logo-link {
     width: 180px;
   }
   
-  .header__nav {
+  .header-nav {
     gap: 1rem;
   }
   
-  .header__profile-btn span,
-  .header__logout-btn span {
+  .header-profile-btn span,
+  .header-logout-btn span {
     display: none;
   }
   
-  .header__profile-btn,
-  .header__logout-btn {
+  .header-profile-btn,
+  .header-logout-btn {
     padding: 0.5rem;
     min-width: 40px;
     justify-content: center;
   }
   
-  .header__register-btn {
+  .header-register-btn {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
-  .header__logo-link {
+  .header-logo-link {
     width: 150px;
   }
   
-  .header__nav {
+  .header-nav {
     gap: 0.5rem;
   }
   
-  .header__nav-link {
+  .header-nav-link {
     padding: 0.5rem;
     font-size: 0.9rem;
   }
   
-  .header__register-btn {
+  .header-register-btn {
     padding: 0.5rem 0.75rem;
   }
 }
