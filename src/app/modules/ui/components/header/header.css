@@ -3,6 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header__container {
@@ -21,4 +23,158 @@
 .header__logo-link img {
   width: 100%;
   height: auto;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header__nav-link {
+  font-family: var(--Montserrat);
+  font-weight: 500;
+  color: #2c3e50;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.header__nav-link:hover {
+  color: #3498db;
+  background: rgba(52, 152, 219, 0.1);
+}
+
+/* Auth Links */
+.header__auth-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header__register-btn {
+  font-family: var(--Montserrat);
+  font-weight: 600;
+  color: white;
+  background: #3498db;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.header__register-btn:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+.header__user-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header__profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: var(--Montserrat);
+  font-weight: 500;
+  color: #2c3e50;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: rgba(52, 152, 219, 0.05);
+  border: 1px solid rgba(52, 152, 219, 0.2);
+}
+
+.header__profile-btn:hover {
+  background: rgba(52, 152, 219, 0.1);
+  color: #3498db;
+  transform: translateY(-1px);
+}
+
+.header__profile-btn i {
+  font-size: 1rem;
+  color: #3498db;
+}
+
+.header__logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+  font-family: var(--Montserrat);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.header__logout-btn:hover {
+  background: #e74c3c;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.header__logout-btn i {
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header__container {
+    width: 95%;
+    padding: 8px 0;
+  }
+  
+  .header__logo-link {
+    width: 180px;
+  }
+  
+  .header__nav {
+    gap: 1rem;
+  }
+  
+  .header__profile-btn span,
+  .header__logout-btn span {
+    display: none;
+  }
+  
+  .header__profile-btn,
+  .header__logout-btn {
+    padding: 0.5rem;
+    min-width: 40px;
+    justify-content: center;
+  }
+  
+  .header__register-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header__logo-link {
+    width: 150px;
+  }
+  
+  .header__nav {
+    gap: 0.5rem;
+  }
+  
+  .header__nav-link {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .header__register-btn {
+    padding: 0.5rem 0.75rem;
+  }
 }

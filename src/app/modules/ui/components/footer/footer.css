@@ -2,13 +2,11 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 85%;
     height: 100px;
     margin: 0 auto;
     padding: 0 50px 0 100px;
     background-color: #000000;
     color: #FFFFFF;
-    border-radius: 50px 50px 0 0;
 }
 
 footer p:nth-child(1) {

@@ -1,1 +1,104 @@
-<p>register-page works!</p>,
+<main class="register-page">
+    <section class="register-container">
+        <div class="register-card">
+            <div class="register-header">
+                <h1>CatWiki</h1>
+                <h2>Sign Up</h2>
+                <p class="register-subtitle">Create your account to join our cat community</p>
+            </div>
+
+            <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" id="name" formControlName="name" class="form-input"
+                        placeholder="Enter your full name" autocomplete="name" />
+                    @if (getFieldError('name')) {
+                        <div class="form-error">
+                            {{ getFieldError('name') }}
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" formControlName="email" class="form-input"
+                        placeholder="Enter your email" autocomplete="email" />
+                    @if (getFieldError('email')) {
+                        <div class="form-error">
+                            {{ getFieldError('email') }}
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="password-input-wrapper">
+                        <input 
+                            [type]="showPassword() ? 'text' : 'password'" id="password" formControlName="password"
+                            class="form-input" placeholder="Create a password"
+                        />
+                        <button type="button" class="password-toggle" (click)="togglePasswordVisibility()"
+                            [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'">
+                            <i [class]="showPassword() ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+                        </button>
+                    </div>
+                    @if (getFieldError('password')) {
+                        <div class="form-error">
+                            {{ getFieldError('password') }}
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <div class="password-input-wrapper">
+                        <input 
+                            [type]="showConfirmPassword() ? 'text' : 'password'" id="confirmPassword" formControlName="confirmPassword"
+                            class="form-input" placeholder="Confirm your password"
+                        />
+                        <button type="button" class="password-toggle" (click)="toggleConfirmPasswordVisibility()"
+                            [attr.aria-label]="showConfirmPassword() ? 'Hide password' : 'Show password'">
+                            <i [class]="showConfirmPassword() ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+                        </button>
+                    </div>
+                    @if (getFieldError('confirmPassword')) {
+                        <div class="form-error">
+                            {{ getFieldError('confirmPassword') }}
+                        </div>
+                    }
+                </div>
+
+                <button type="submit" class="register-button" [disabled]="registerForm.invalid || loading()"
+                    [class.loading]="loading()">
+                    @if (!loading()) {
+                        <span>Create Account</span>
+                    } @else {
+                        <span class="loading-content">
+                            <span class="spinner"></span>
+                            Creating account...
+                        </span>
+                    }
+                </button>
+
+                @if (error()) {
+                    <div class="form-error">
+                        {{ error() }}
+                    </div>
+                }
+            </form>
+
+            <div class="register-footer">
+                <p>Already have an account?
+                    <a routerLink="/auth/login" class="login-link">Sign in</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="register-image">
+            <div class="image-overlay">
+                <h3>Welcome to CatWiki</h3>
+                <p>Discover fascinating facts about different cat breeds, learn about their characteristics, and connect with fellow cat enthusiasts.</p>
+            </div>
+        </div>
+    </section>
+</main>
